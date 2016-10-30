@@ -6,6 +6,12 @@ def move_left():
 def move_right():
     pass
 
+def run_left():
+    pass
+
+def run_right():
+    pass
+
 def jump():
     pass
 
