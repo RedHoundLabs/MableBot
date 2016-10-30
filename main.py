@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
 from System import keyboard
+import time
 
-keyboard.type('Hello')
+time.sleep(5)
+keyboard.jump()
