@@ -3,5 +3,7 @@
 from System import keyboard
 import time
 
-time.sleep(5)
+time.sleep(3)
 keyboard.jump()
+time.sleep(1)
+keyboard.longJump()

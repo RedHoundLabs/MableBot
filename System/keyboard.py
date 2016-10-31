@@ -15,9 +15,27 @@ def pressMultiple(arr):
     k.press_keys(arr)
 
 
-def run():
-    k.tap_key(k.right_key)
+def forward():
+    k.press_key('d')
+
+def backward():
+    k.press_key('a')
+
+def attack():
+    k.tap_key('b')
+
+
+def stop():
+    k.release_key('d')
+    k.release_key('a')
+
+def longJump():
+    k.press_key('z')
+    time.sleep(1)
+    k.release_key('z')
+
 
 def jump():
-    k.press_key('a')
-    time.sleep(2)
+    k.press_key('z')
+    time.sleep(.2)
+    k.release_key('z')
