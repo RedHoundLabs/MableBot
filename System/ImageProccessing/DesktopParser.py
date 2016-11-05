@@ -9,10 +9,11 @@ from matplotlib import pyplot as plt
 # whether cropping is being performed or not
 refPt = []
 cropping = False
+image = "";
 
 def click_and_crop(event, x, y, flags, param):
 	# grab references to the global variables
-	global refPt, cropping
+	global refPt, cropping, image
 
 	# if the left mouse button was clicked, record the starting
 	# (x, y) coordinates and indicate that cropping is being
@@ -33,29 +34,32 @@ def click_and_crop(event, x, y, flags, param):
 		cv2.imshow("image", image)
 
 
-# load the image, clone it, and setup the mouse callback function
-pil_image = ImageGrab.grab()
-image = cv2.cvtColor(numpy.array(pil_image), cv2.COLOR_RGB2BGR)
-clone = image.copy()
-cv2.namedWindow("image")
-cv2.setMouseCallback("image", click_and_crop)
+def getGameView():
+    global refPt, cropping, image
+    # load the image, clone it, and setup the mouse callback function
+    pil_image = ImageGrab.grab()
+    image = cv2.cvtColor(numpy.array(pil_image), cv2.COLOR_RGB2BGR)
+    clone = image.copy()
+    cv2.namedWindow("image")
+    cv2.setMouseCallback("image", click_and_crop)
 
-# keep looping until the 'q' key is pressed
-while True:
-	# display the image and wait for a keypress
-	cv2.imshow("image", image)
-	key = cv2.waitKey(1) & 0xFF
+    # keep looping until the 'q' key is pressed
+    while True:
+    	# display the image and wait for a keypress
+    	cv2.imshow("image", image)
+    	key = cv2.waitKey(1) & 0xFF
 
-	# if the 'c' key is pressed, break from the loop
-	if key == ord("c"):
-		break
+    	# if the 'c' key is pressed, break from the loop
+    	if key == ord("c"):
+    		break
 
-# if there are two reference points, then crop the region of interest
-# from teh image and display it
-cv2.destroyWindow("image")
-if len(refPt) == 2:
-	# close all open windows
+    # if there are two reference points, then crop the region of interest
+    # from teh image and display it
     cv2.destroyWindow("image")
-    cv2.waitKey(0)
-    img = ImageGrab.grab(bbox=(refPt[0][0], refPt[0][1], refPt[1][0], refPt[1][1]))
-    img.show()
+    if len(refPt) == 2:
+    	# close all open windows
+        cv2.destroyWindow("image")
+        #cv2.waitKey(0)
+        #img = ImageGrab.grab(bbox=(refPt[0][0], refPt[0][1], refPt[1][0], refPt[1][1]))
+        #img.show()
+        return [refPt[0][0], refPt[0][1], refPt[1][0], refPt[1][1]]
