@@ -1,4 +1,4 @@
-from ImageProccessing import DesktopParser
-
+from ImageProccessing import DesktopParser, Watcher
 
 bbox = DesktopParser.getGameView()
+Watcher.displayGameFeed(bbox)

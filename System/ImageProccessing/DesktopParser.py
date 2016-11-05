@@ -59,7 +59,7 @@ def getGameView():
     if len(refPt) == 2:
     	# close all open windows
         cv2.destroyWindow("image")
-        #cv2.waitKey(0)
+        cv2.waitKey(0)
         #img = ImageGrab.grab(bbox=(refPt[0][0], refPt[0][1], refPt[1][0], refPt[1][1]))
         #img.show()
         return [refPt[0][0], refPt[0][1], refPt[1][0], refPt[1][1]]
