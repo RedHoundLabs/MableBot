@@ -3,6 +3,7 @@ from PIL import ImageGrab
 from PIL import Image
 import numpy
 from matplotlib import pyplot as plt
+import time
 
 # initialize the list of reference points and boolean indicating
 # whether cropping is being performed or not
@@ -53,10 +54,8 @@ while True:
 # from teh image and display it
 cv2.destroyWindow("image")
 if len(refPt) == 2:
-	roi = clone[refPt[0][1]:refPt[1][1], refPt[0][0]:refPt[1][0]]
-	cv2.imshow("ROI", roi)
-
-	cv2.waitKey(0)
-
-# close all open windows
-cv2.destroyAllWindows()
+	# close all open windows
+    cv2.destroyWindow("image")
+    cv2.waitKey(0)
+    img = ImageGrab.grab(bbox=(refPt[0][0], refPt[0][1], refPt[1][0], refPt[1][1]))
+    img.show()
