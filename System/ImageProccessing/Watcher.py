@@ -3,7 +3,8 @@ from PIL import Image
 import cv2
 import numpy
 import time
-from multiprocessing import Pool, Process
+import threading
+import gtk.gdk
 
 def getImage(bbox):
     while True:
@@ -12,9 +13,24 @@ def getImage(bbox):
         cv2.imshow("image", image)
         cv2.waitKey(1)
 
+
+def gtkThingy():
+    w = gtk.gdk.get_default_root_window()
+    sz = w.get_size()
+    print "The size of the window is %d x %d" % sz
+    pb = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB,False,8,sz[0],sz[1])
+    pb = pb.get_from_drawable(w,w.get_colormap(),0,0,0,0,sz[0],sz[1])
+    if (pb != None):
+        pb.save("screenshot.png","png")
+        print "Screenshot saved to screenshot.png."
+    else:
+        print "Unable to get the screenshot."
+
+
 def callback():
     print "hello"
 
 
 def displayGameFeed(bbox):
-    getImage(bbox)
+    thread = threading.Thread(target=getImage, args=(bbox,))
+    thread.start()
